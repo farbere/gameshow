@@ -1,0 +1,290 @@
+%Gameshow%
+%Modified Oct 2024%
+
+\documentclass[12pt, oneside]{book}
+\usepackage[pagewise]{lineno}
+\usepackage[margin=1.5in]{geometry}  
+% \usepackage{mathpazo} %changes font
+\usepackage{amsmath,amsthm,amssymb,graphicx,tikz,mathtools,enumitem,tikz-cd,tkz-graph,caption,subcaption,pdflscape,adjustbox,comment,amsfonts,hyperref}
+
+\hbadness=99999  % or any number >=10000
+%jljadlkjsldkajldajldajlkdjad
+%Shortcut commands%
+
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}} 
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calG}{\mathcal{G}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calI}{\mathcal{I}}
+\newcommand{\calJ}{\mathcal{J}}
+\newcommand{\calK}{\mathcal{K}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calR}{\mathcal{R}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calU}{\mathcal{U}}
+\newcommand{\calV}{\mathcal{V}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calX}{\mathcal{X}}
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calZ}{\mathcal{Z}}
+
+\newcommand{\frakA}{\mathfrak{A}}
+\newcommand{\frakB}{\mathfrak{B}}
+\newcommand{\frakC}{\mathfrak{C}}
+\newcommand{\frakD}{\mathfrak{D}}
+\newcommand{\frakE}{\mathfrak{E}}
+\newcommand{\frakF}{\mathfrak{F}}
+\newcommand{\frakG}{\mathfrak{G}}
+\newcommand{\frakH}{\mathfrak{H}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakK}{\mathfrak{K}}
+\newcommand{\frakL}{\mathfrak{L}}
+\newcommand{\frakM}{\mathfrak{M}}
+\newcommand{\frakN}{\mathfrak{N}}
+\newcommand{\frakO}{\mathfrak{O}}
+\newcommand{\frakP}{\mathfrak{P}}
+\newcommand{\frakQ}{\mathfrak{Q}}
+\newcommand{\frakR}{\mathfrak{R}}
+\newcommand{\frakS}{\mathfrak{S}}
+\newcommand{\frakT}{\mathfrak{T}}
+\newcommand{\frakU}{\mathfrak{U}}
+\newcommand{\frakV}{\mathfrak{V}}
+\newcommand{\frakW}{\mathfrak{W}}
+\newcommand{\frakX}{\mathfrak{X}}
+\newcommand{\frakY}{\mathfrak{Y}}
+\newcommand{\frakZ}{\mathfrak{Z}}
+
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakc}{\mathfrak{c}}
+\newcommand{\frakd}{\mathfrak{d}}
+\newcommand{\frake}{\mathfrak{e}}
+\newcommand{\frakf}{\mathfrak{f}}
+\newcommand{\frakg}{\mathfrak{g}}
+\newcommand{\frakh}{\mathfrak{h}}
+\newcommand{\fraki}{\mathfrak{i}}
+\newcommand{\frakj}{\mathfrak{j}}
+\newcommand{\frakk}{\mathfrak{k}}
+\newcommand{\frakl}{\mathfrak{l}}
+\newcommand{\frakm}{\mathfrak{m}}
+\newcommand{\frakn}{\mathfrak{n}}
+\newcommand{\frako}{\mathfrak{o}}
+\newcommand{\frakp}{\mathfrak{p}}
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakr}{\mathfrak{r}}
+\newcommand{\fraks}{\mathfrak{s}}
+\newcommand{\frakt}{\mathfrak{t}}
+\newcommand{\fraku}{\mathfrak{u}}
+\newcommand{\frakv}{\mathfrak{v}}
+\newcommand{\frakw}{\mathfrak{w}}
+\newcommand{\frakx}{\mathfrak{x}}
+\newcommand{\fraky}{\mathfrak{y}}
+\newcommand{\frakz}{\mathfrak{z}}
+
+%New Operators%
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\It}{It}
+\DeclareMathOperator{\C}{C}
+\DeclareMathOperator{\PC}{PC}
+\DeclareMathOperator{\WPC}{WPC}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\h}{h}
+\DeclareMathOperator{\Down}{Down}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclareMathOperator{\PA}{PA}
+\DeclareMathOperator{\inte}{int}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\med}{med}
+\DeclareMathOperator{\Pre}{Pre}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\MaxTr}{MaxTr}
+\DeclareMathOperator{\AveTr}{AveTr}
+\DeclareMathOperator{\CB}{CB}
+\DeclareMathOperator{\dCB}{dCB}
+
+
+%New Delimiters
+
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}
+
+%Landscape page numbering
+\def\fillandplacepagenumber{%
+ \par\pagestyle{empty}%
+ \vbox to 0pt{\vss}\vfill
+ \vbox to 0pt{\baselineskip0pt
+   \hbox to\linewidth{\hss}%
+   \baselineskip\footskip
+   \hbox to\linewidth{%
+     \hfil\thepage\hfil}\vss}}
+
+%Environments%
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{mainthm}{Theorem}
+\newtheorem{maincor}[mainthm]{Corollary}
+\newtheorem{fundlem}{Lemma}
+\renewcommand*{\thefundlem}{\Alph{fundlem}}
+\newtheorem{conj}{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem{question}[thm]{Question}
+
+%Title and Name%
+
+\title{Analyzing a Game Show}
+\author{Ethan Farber}
+
+\begin{document}
+\newpage
+
+\maketitle
+
+%Abstract%
+
+\section{Intro}
+
+You're playing a game show with a straightforward premise. You start with \textdollar 1 and flip 100 coins, following this algorithm:
+
+\begin{enumerate}
+\item Set $d_0=1$, your initial dollar amount.
+\item Pick a constant $k \in [0,1]$: that is, $0 \leq k \leq 1$.
+\item For $i=1, 2, \ldots, 100$:
+\begin{enumerate}
+\item Flip a fair coin and define
+
+\[
+d_i=
+\begin{cases}
+(1+k) \cdot d_{i-1} & \text{if the coin lands heads}\\
+(1-k) \cdot d_{i-1} & \text{if the coin lands tails.}
+\end{cases}
+\]
+
+That is, you gain $k$ times your current dollar amount if the coin is heads, and you lose the same amount if not.
+\end{enumerate}
+\end{enumerate}
+
+Your goal is to end the game with the highest dollar amount you can. In other words, you aim to maximize $d_{100}$. Your only input during the game is the choice of the number $k$ in step (2), leading us to the first main question of this note:
+
+\begin{question}\label{question:expect1}
+What value of $k$ maximizes $E(d_{100})$, the expected value of $d_{100}$?
+\end{question}
+
+Our team found multiple ways to the answer of Question \ref{question:expect1}. The first way is by defining, for each $i$, the random variable
+
+\[
+X_i = \frac{d_i}{d_{i-1}} = \begin{cases}
+k+1 & \text{if the $i$-th coin is heads}\\
+k-1 & \text{if the $i$-th coin is tails.}
+\end{cases}
+\]
+
+What's the probability distribution of $X_i$? Since we are flipping fair coins, $X_i$ has a $50\%$ chance of being $k+1$, and a $50\%$ chance of being $k-1$. In particular, the expected value of $X_i$ is
+
+\begin{align*}
+E(X_i) & = \bigg ( P(X_i = k+1) \cdot (k+1) \bigg ) + \bigg ( P(X_i = k-1) \cdot (k-1) \bigg ) \\
+& = 0.5 \cdot (k+1) + 0.5 \cdot (k-1)\\
+& = 1
+\end{align*}
+
+The next thing to notice is that the final dollar amount $d_{100}$ is just the product of all these $X_i$ together:
+
+\[
+d_{100} = X_1 \cdot X_2 \cdot \ldots \cdot X_{99} \cdot X_{100} = \prod_{i=1}^{100} X_i
+\]
+
+Since the $X_i$ are independent of each other, we can now compute $E(d_{100})$ by multiplying the expectations of each $X_i$:
+
+\begin{equation}\label{eqn:expect1}
+E(d_{100}) = E \left ( \prod_{i=1}^{100} X_i \right ) = \prod_{i=1}^{100} E(X_i) = 1.
+\end{equation}
+
+Thus we arrive at the answer to Question \ref{question:expect1}. In truth, we've realized two things:
+
+\begin{enumerate}
+\item The choice of $k$ does \underline{NOT} affect the player's expected earnings.
+\item The player's money is expected to be the same at the end of the game as it was at the beginning.
+\end{enumerate}
+
+That's kind of interesting, but it's also kind of dull, too. Everyone on the team immediately started coming up with variations of the game in order to see how the player's strategy might evolve. Before getting to some of these ideas, I'm going to present another way of arriving at Equation (\ref{eqn:expect1}). I promise, it will be worth it!
+
+\
+
+Our calculation in Equation (\ref{eqn:expect1}) used the independence of each $X_i$ to compute $E(d_{100})$. Another way to compute this expectation, though, is to figure out the full probability distribution of $d_{100}$. Let's do that now.
+
+\
+
+What are the possible values of $d_{100}$? Remembering that $d_{100}$ is the product of the $X_i$'s, we can start listing out these possible values:
+
+\begin{enumerate}
+\item If no coin lands heads, then $X_i=k-1$ for each $i$, and so $d_{100} = (1-k)^{100}$. 
+\item If exactly one coin lands heads, then $d_{100} = (1+k)(1-k)^{99}$.
+\item In general, if exactly $i$ coins land heads, then $d_{100} = (1+k)^i (1-k)^{100-i}$.
+\end{enumerate}
+
+Moreover, the number of ways exactly $i$ coins land heads is the binomial coefficient
+
+\[
+\binom{100}{i} = \frac{100!}{i!(n-i)!}.
+\]
+
+Since there are a total of $2^{100}$ possible ways the game could play out (2 options for each of the 100 coin flips), we obtain the following formula for the probability distribution of $d_{100}$:
+
+\begin{equation}\label{eqn:dist1}
+P \Big (d_{100}=(k+1)^i(1-k)^{n-i} \Big ) = 2^{-100} \cdot \binom{100}{i}
+\end{equation}
+\end{document}
