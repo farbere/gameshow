@@ -202,10 +202,7 @@ You're playing a game show with a straightforward premise. You start with \textd
 \begin{enumerate}
 \item Set $d_0=1$, your initial dollar amount.
 \item Pick a constant $k \in [0,1]$: that is, $0 \leq k \leq 1$.
-\item For $i=1, 2, \ldots, 100$:
-\begin{enumerate}
-\item Flip a fair coin and define
-
+\item For $i=1, 2, \ldots, 100$, flip a fair coin and define
 \[
 d_i=
 \begin{cases}
@@ -216,75 +213,175 @@ d_i=
 
 That is, you gain $k$ times your current dollar amount if the coin is heads, and you lose the same amount if not.
 \end{enumerate}
-\end{enumerate}
 
-Your goal is to end the game with the highest dollar amount you can. In other words, you aim to maximize $d_{100}$. Your only input during the game is the choice of the number $k$ in step (2), leading us to the first main question of this note:
+\noindent Your goal is to end the game with the highest dollar amount you can. In other words, you aim to maximize $d_{100}$. Your only input during the game is the choice of the number $k$ in step (2), leading us to the first question of this note:
 
 \begin{question}\label{question:expect1}
 What value of $k$ maximizes $E(d_{100})$, the expected value of $d_{100}$?
 \end{question}
 
-Our team found multiple ways to the answer of Question \ref{question:expect1}. The first way is by defining, for each $i$, the random variable
+Our team found multiple ways to the answer of Question \ref{question:expect1}. One way is by defining, for each $i$, the random variable
 
 \[
 X_i = \frac{d_i}{d_{i-1}} = \begin{cases}
-k+1 & \text{if the $i$-th coin is heads}\\
-k-1 & \text{if the $i$-th coin is tails.}
+1+k & \text{if the $i$-th coin is heads}\\
+1-k & \text{if the $i$-th coin is tails.}
 \end{cases}
 \]
 
-What's the probability distribution of $X_i$? Since we are flipping fair coins, $X_i$ has a $50\%$ chance of being $k+1$, and a $50\%$ chance of being $k-1$. In particular, the expected value of $X_i$ is
+What's the probability distribution of $X_i$? Since we are flipping fair coins, $X_i$ has a $50\%$ chance of being $1+k$, and a $50\%$ chance of being $1-k$. In particular, the expected value of $X_i$ is
 
 \begin{align*}
-E(X_i) & = \bigg ( P(X_i = k+1) \cdot (k+1) \bigg ) + \bigg ( P(X_i = k-1) \cdot (k-1) \bigg ) \\
-& = 0.5 \cdot (k+1) + 0.5 \cdot (k-1)\\
+E(X_i) & = \bigg ( P(X_i = 1+k) \cdot (1+k) \bigg ) + \bigg ( P(X_i = 1-k) \cdot (1-k) \bigg ) \\
+& = 0.5 \cdot (1+k) + 0.5 \cdot (1-k)\\
 & = 1
 \end{align*}
 
-The next thing to notice is that the final dollar amount $d_{100}$ is just the product of all these $X_i$ together:
+\noindent The next thing to notice is that the final dollar amount $d_{100}$ is just the product of all these $X_i$ together:
 
 \[
 d_{100} = X_1 \cdot X_2 \cdot \ldots \cdot X_{99} \cdot X_{100} = \prod_{i=1}^{100} X_i
 \]
 
-Since the $X_i$ are independent of each other, we can now compute $E(d_{100})$ by multiplying the expectations of each $X_i$:
+\noindent Since the $X_i$ are independent of each other, we can now compute $E(d_{100})$ by multiplying the expectations of each $X_i$:
 
 \begin{equation}\label{eqn:expect1}
 E(d_{100}) = E \left ( \prod_{i=1}^{100} X_i \right ) = \prod_{i=1}^{100} E(X_i) = 1.
 \end{equation}
 
-Thus we arrive at the answer to Question \ref{question:expect1}. In truth, we've realized two things:
+\noindent Thus we arrive at the answer to Question \ref{question:expect1}. In truth, we've realized two things:
 
 \begin{enumerate}
 \item The choice of $k$ does \underline{NOT} affect the player's expected earnings.
 \item The player's money is expected to be the same at the end of the game as it was at the beginning.
 \end{enumerate}
 
-That's kind of interesting, but it's also kind of dull, too. Everyone on the team immediately started coming up with variations of the game in order to see how the player's strategy might evolve. Before getting to some of these ideas, I'm going to present another way of arriving at Equation (\ref{eqn:expect1}). I promise, it will be worth it!
+That's kind of interesting, but it's also kind of dull, too. Everyone on the team immediately started coming up with variations of the game in order to see how the player's strategy might evolve. For example, several people asked the following question.
 
-\
+\begin{question}
+Suppose the coin is not necessarily fair, but instead has a probability of heads equal to $h$. What value of $k$ should the player choose to maximize $E(d_{100})$ based on $h$?
+\end{question}
 
-Our calculation in Equation (\ref{eqn:expect1}) used the independence of each $X_i$ to compute $E(d_{100})$. Another way to compute this expectation, though, is to figure out the full probability distribution of $d_{100}$. Let's do that now.
+Our analysis proceeds in much the same way as before. In this case, each $X_i$ now has expectation
 
-\
+\begin{align*}
+E(X_i) & = h \cdot (1+k) + (1-h) \cdot (1-k)\\
+& = h+hk+1-h-k+hk\\
+& = 1-2hk-k\\
+& = 1+k(2h-1).
+\end{align*}
 
-What are the possible values of $d_{100}$? Remembering that $d_{100}$ is the product of the $X_i$'s, we can start listing out these possible values:
+\noindent By the same logic as before, we then have
+
+\begin{equation}\label{eqn:expect2}
+E(d_{100}) = \prod_{i=1}^{100} E(X_i) = (1+k(2h-1))^{100}.
+\end{equation}
+
+Fantastic! Now the dependence on the player's choice $k$ is in the formula for their expected payout. We can also see that when the coin is fair, i.e. when $h=1/2$, the contribution from $k$ vanishes.
+
+In general, though, how can the player maximize their expectation using this formula? There are three cases, summarized in Table \ref{table:possibilities}.
+
+\begin{table}[!h]
+\caption{Game possibilities}
+\centering
+\begin{tabular}{c | c | c | c}
+\hline \hline
+Case & Value of $h$ & Optimal $k$ & $E(d_{100})$\\
+%heading
+\hline
+Biased against player & $h<1/2$ & $k=0$ & $1$ \\
+Fair coin & $h=1/2$ & Any $k$ & $1$ \\
+Biased for player & $h>1/2$ & $k=1$ & $(2h)^{100}$\\
+\hline
+\end{tabular}
+\label{table:possibilities}
+\end{table}
+
+On paper, it looks like the case when $h>1/2$ is best for the player. After all, the player's expected payout is the highest in this case: if $h>1/2$ then $2h >1$, and so $(2h)^{100}>1$. Moreover, the value of this payout skyrockets extremely quickly as $h$ increases above $50\%$.
+
+Here, however, is where we see the failure of focusing only on the expected value. Choosing $k=1$ means the player wages all of their money on every coin flip, so the only way they finish the game with any money at all is if every single coin flip be heads:
+
+\begin{table}[!h]
+\caption{Probability distribution for $h>1/2$ and $k=1$}
+\centering
+\begin{tabular}{c | c | c}
+\hline \hline
+Number of heads & Probability & Payout\\
+%heading
+\hline
+$100$ & $h^{100}$ & $(2h)^{100}$ \\
+99 or fewer & $1-h^{100}$ & $0$\\
+\hline
+\end{tabular}
+\label{table:probdist1}
+\end{table}
+
+\noindent That is a bimodal distribution \textit{par excellence}. To help understand how unlikely it is for the player to finish the game without losing all their money, note that in order for the \textbf{median} payout to not be $0$, we require the probability of flipping heads to satisfy
+
+\[
+h > \sqrt[100]{0.5} = 0.993...
+\]
+
+\noindent Suffice it to say that many people would not call this strategy ``optimal."
+
+At this point, it's natural to wonder what the distribution of $d_{100}$ looks like in general. What are the possible values of $d_{100}$? Remembering that $d_{100}$ is the product of the $X_i$'s, we can start listing out these possible values:
 
 \begin{enumerate}
-\item If no coin lands heads, then $X_i=k-1$ for each $i$, and so $d_{100} = (1-k)^{100}$. 
+\item If no coin lands heads, then $X_i=1-k$ for each $i$, and so $d_{100} = (1-k)^{100}$. 
 \item If exactly one coin lands heads, then $d_{100} = (1+k)(1-k)^{99}$.
 \item In general, if exactly $i$ coins land heads, then $d_{100} = (1+k)^i (1-k)^{100-i}$.
 \end{enumerate}
 
-Moreover, the number of ways exactly $i$ coins land heads is the binomial coefficient
+\noindent Moreover, the number of ways exactly $i$ coins land heads is the binomial coefficient
 
 \[
 \binom{100}{i} = \frac{100!}{i!(n-i)!}.
 \]
 
-Since there are a total of $2^{100}$ possible ways the game could play out (2 options for each of the 100 coin flips), we obtain the following formula for the probability distribution of $d_{100}$:
+\noindent We obtain the following formula for the probability distribution of $d_{100}$: for each $i=0, 1, \ldots, 100$,
 
 \begin{equation}\label{eqn:dist1}
-P \Big (d_{100}=(k+1)^i(1-k)^{n-i} \Big ) = 2^{-100} \cdot \binom{100}{i}
+P \Big (d_{100}=(1+k)^i(1-k)^{n-i} \Big ) = \binom{100}{i} \cdot h^i \cdot (1-h)^{100-i}
 \end{equation}
+
+Several members of the team pointed out that this looks quite a bit like a binomial distribution. For comparison, the distribution of a binomial random variable $B$ with $100$ trials and probability of success $h$ is
+
+\[
+P(B=i) = \binom{100}{i} \cdot h^i \cdot (1-h)^{100-i}
+\]
+
+\noindent In other words, the \textit{probability values} ($y$-values in the histogram) of the distribution of $d_{100}$ match with a binomial distribution, but the \textit{outcome values} ($x$-values) are different. To bridge the gap between these distributions, we can make a few observations. For this part, we'll have to require that $k \neq 1$:
+
+\begin{enumerate}
+\item The minimum value of $B$ is $0$, and each subsequent value is just one more than the previous.
+
+\[
+\begin{tikzcd}
+0 \arrow{r}{+1} & 1 \arrow{r}{+1} & \cdots \arrow{r}{+1} & 100
+\end{tikzcd}
+\]
+
+\item The minimum value of $d_{100}$ is $(1-k)^{100}$, and each subsequent value is $\frac{1+k}{1-k}$ times more than the previous one (this is why we can't have $k=1$):
+
+\[
+\begin{tikzcd}
+(1-k)^{100} \arrow{r}{\times \frac{1+k}{1-k}} & (1+k)(1-k)^{99} \arrow{r}{\times \frac{1+k}{1-k}} & \cdots \arrow{r}{\times \frac{1+k}{1-k}} & (1+k)^{100}
+\end{tikzcd}
+\]
+
+\end{enumerate}
+
+\noindent Therefore, if we set
+
+\[
+\alpha = \frac{1+k}{1-k} \hspace{5mm} \text{and} \hspace{5mm} \beta = \log_{\alpha} \big ( (1-k)^{100} \big ),
+\]
+
+\noindent then a little algebra will show that
+
+\[
+B = \log_{\alpha}(d_{100}) - \beta.
+\]
+
+\noindent In other words, $d_{100}$ has a \textit{log-binomial}. In particular, any analysis of $d_{100}$ can usually be done by studying the binomial variable $B$ and then translating the results appropriately.
 \end{document}
